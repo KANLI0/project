@@ -15,8 +15,9 @@ namespace efe
             int hard = 100;
             int zorluk;
             int human_point = 20;
-            int computer_point = 20;
-            int maxvalue = 20;
+            int computer_current = 0;
+            int computer_max = 0;
+            int computer_point_total = 0;
             do
             {
                 Console.WriteLine("\nCHOOSE A GAME MODE \n1-EASY\n2-MODERATE\n3-HARD");
@@ -943,450 +944,472 @@ namespace efe
 
                 // geçici olarak 0 değerlerini atadım.
                 int tur = 0;
-                int max_puan_yer = 0;
-                int max_puan_harf = 0;
-                int max_puan_renk = 0;
-                int computer_point2 = 0;
+             
                
                 do
                 {
-                    int rand = random.Next(1, 10);
-                    int rand2 = random.Next(1, 4);
-                    int rand3 = random.Next(1, 4);
-                    computer_point = 0;
+                    Random rand = new Random();
+                    // Rastgele bir blok seçme
+                    int block_choice2 = rand.Next(1, 10);
+                    int letter_choice2 = rand.Next(1, 4);
+                    int color_choice2 = rand.Next(1, 4);
 
-                    if (rand == 1)
+                    if (block_choice2 == 1)
                     {
-                        if (rand2 == 1) { a = "D"; if (rand3 == 1) colorA = 1; else if (rand3 == 2) colorA = 2; else colorA = 3; }
-                        else if (rand2 == 2) { a = "E"; if (rand3 == 1) colorA = 1; else if (rand3 == 2) colorA = 2; else colorA = 3; }
-                        else { a = "U"; if (rand3 == 1) colorA = 1; else if (rand3 == 2) colorA = 2; else colorA = 3; }
-                    }
-                    else if (rand == 2)
-                    {
-                        if (rand2 == 1) { b = "D"; if (rand3 == 1) colorB = 1; else if (rand3 == 2) colorB = 2; else colorB = 3; }
-                        else if (rand2 == 2) { b = "E"; if (rand3 == 1) colorB = 1; else if (rand3 == 2) colorB = 2; else colorB = 3; }
-                        else { b = "U"; if (rand3 == 1) colorB = 1; else if (rand3 == 2) colorB = 2; else colorB = 3; }
-                    }
-                    else if (rand == 3)
-                    {
-                        if (rand2 == 1) { c = "D"; if (rand3 == 1) colorC = 1; else if (rand3 == 2) colorC = 2; else colorC = 3; }
-                        else if (rand2 == 2) { c = "E"; if (rand3 == 1) colorC = 1; else if (rand3 == 2) colorC = 2; else colorC = 3; }
-                        else { c = "U"; if (rand3 == 1) colorC = 1; else if (rand3 == 2) colorC = 2; else colorC = 3; }
-                    }
-                    else if (rand == 4)
-                    {
-                        if (rand2 == 1) { d = "D"; if (rand3 == 1) colorD = 1; else if (rand3 == 2) colorD = 2; else colorD = 3; }
-                        else if (rand2 == 2) { c = "E"; if (rand3 == 1) colorD = 1; else if (rand3 == 2) colorD = 2; else colorD = 3; }
-                        else { d = "U"; if (rand3 == 1) colorD = 1; else if (rand3 == 2) colorD = 2; else colorD = 3; }
-                    }
-                    else if (rand == 5)
-                    {
-                        if (rand2 == 1) { e = "D"; if (rand3 == 1) colorE = 1; else if (rand3 == 2) colorE = 2; else colorE = 3; }
-                        else if (rand2 == 2) { e = "E"; if (rand3 == 1) colorE = 1; else if (rand3 == 2) colorE = 2; else colorE = 3; }
-                        else { e = "U"; if (rand3 == 1) colorE = 1; else if (rand3 == 2) colorE = 2; else colorE = 3; }
-                    }
-                    else if (rand == 6)
-                    {
-                        if (rand2 == 1) { f = "D"; if (rand3 == 1) colorF = 1; else if (rand3 == 2) colorF = 2; else colorF = 3; }
-                        else if (rand2 == 2) { f = "E"; if (rand3 == 1) colorF = 1; else if (rand3 == 2) colorF = 2; else colorF = 3; }
-                        else { f = "U"; if (rand3 == 1) colorF = 1; else if (rand3 == 2) colorF = 2; else colorF = 3; }
-                    }
-                    else if (rand == 7)
-                    {
-                        if (rand2 == 1) { g = "D"; if (rand3 == 1) colorG = 1; else if (rand3 == 2) colorG = 2; else colorG = 3; }
-                        else if (rand2 == 2) { g = "E"; if (rand3 == 1) colorG = 1; else if (rand3 == 2) colorG = 2; else colorG = 3; }
-                        else { g = "U"; if (rand3 == 1) colorG = 1; else if (rand3 == 2) colorG = 2; else colorG = 3; }
-                    }
-                    else if (rand == 8)
-                    {
-                        if (rand2 == 1) { h = "D"; if (rand3 == 1) colorH = 1; else if (rand3 == 2) colorH = 2; else colorH = 3; }
-                        else if (rand2 == 2) { h = "E"; if (rand3 == 1) colorH = 1; else if (rand3 == 2) colorH = 2; else colorH = 3; }
-                        else { h = "U"; if (rand3 == 1) colorH = 1; else if (rand3 == 2) colorH = 2; else colorH = 3; }
-                    }
-                    else
-                    {
-                        if (rand2 == 1) { i = "D"; if (rand3 == 1) colorI = 1; else if (rand3 == 2) colorI = 2; else colorI = 3; }
-                        else if (rand2 == 2) { i = "E"; if (rand3 == 1) colorI = 1; else if (rand3 == 2) colorI = 2; else colorI = 3; }
-                        else { i = "U"; if (rand3 == 1) colorI = 1; else if (rand3 == 2) colorI = 2; else colorI = 3; }
-                    }
-                    //puanlama kısmı 
+                        if (color_choice2 == 1 && letter_choice2 == 1) { a = "D"; colorA = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 1) { a = "D"; colorA = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 1) { a = "D"; colorA = 3; }
 
+                        else if (color_choice2 == 1 && letter_choice2 == 2) { a = "E"; colorA = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 2) { a = "E"; colorA = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 2) { a = "E"; colorA = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 3) { a = "U"; colorA = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 3) { a = "U"; colorA = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 3) { a = "U"; colorA = 3; }
+                    }
+                    if (block_choice2 == 2)
+                    {
+                        if (color_choice2 == 1 && letter_choice2 == 1) { b = "D"; colorB = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 1) { b = "D"; colorB = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 1) { b = "D"; colorB = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 2) { b = "E"; colorB = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 2) { b = "E"; colorB = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 2) { b = "E"; colorB = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 3) { b = "U"; colorB = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 3) { b = "U"; colorB = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 3) { b = "U"; colorB = 3; }
+                    }
+                    if (block_choice2 == 3)
+                    {
+                        if (color_choice2 == 1 && letter_choice2 == 1) { c = "D"; colorC = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 1) { c = "D"; colorC = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 1) { c = "D"; colorC = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 2) { c = "E"; colorC = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 2) { c = "E"; colorC = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 2) { c = "E"; colorC = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 3) { c = "U"; colorC = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 3) { c = "U"; colorC = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 3) { c = "U"; colorC = 3; }
+                    }
+                    if (block_choice2 == 3)
+                    {
+                        if (color_choice2 == 1 && letter_choice2 == 1) { d = "D"; colorD = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 1) { d = "D"; colorD = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 1) { d = "D"; colorD = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 2) { d = "E"; colorD = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 2) { d = "E"; colorD = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 2) { d = "E"; colorD = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 3) { d = "U"; colorD = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 3) { d = "U"; colorD = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 3) { d = "U"; colorD = 3; }
+                    }
+                    if (block_choice2 == 4)
+                    {
+                        if (color_choice2 == 1 && letter_choice2 == 1) { e = "D"; colorE = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 1) { e = "D"; colorE = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 1) { e = "D"; colorE = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 2) { e = "E"; colorE = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 2) { e = "E"; colorE = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 2) { e = "E"; colorE = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 3) { e = "U"; colorE = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 3) { e = "U"; colorE = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 3) { e = "U"; colorE = 3; }
+                    }
+                    if (block_choice2 == 5)
+                    {
+                        if (color_choice2 == 1 && letter_choice2 == 1) { f = "D"; colorF = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 1) { f = "D"; colorF = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 1) { f = "D"; colorF = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 2) { f = "E"; colorF = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 2) { f = "E"; colorF = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 2) { f = "E"; colorF = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 3) { f = "U"; colorF = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 3) { f = "U"; colorF = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 3) { f = "U"; colorF = 3; }
+                    }
+                    if (block_choice2 == 6)
+                    {
+                        if (color_choice2 == 1 && letter_choice2 == 1) { g = "D"; colorG = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 1) { g = "D"; colorG = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 1) { g = "D"; colorG = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 2) { g = "E"; colorG = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 2) { g = "E"; colorG = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 2) { g = "E"; colorG = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 3) { g = "U"; colorG = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 3) { g = "U"; colorG = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 3) { g = "U"; colorG = 3; }
+                    }
+                    if (block_choice2 == 7)
+                    {
+                        if (color_choice2 == 1 && letter_choice2 == 1) { h = "D"; colorH = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 1) { h = "D"; colorH = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 1) { h = "D"; colorH = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 2) { h = "E"; colorH = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 2) { h = "E"; colorH = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 2) { h = "E"; colorH = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 3) { h = "U"; colorH = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 3) { h = "U"; colorH = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 3) { h = "U"; colorH = 3; }
+                    }
+                    if (block_choice2 == 8)
+                    {
+                        if (color_choice2 == 1 && letter_choice2 == 1) { i = "D"; colorI = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 1) { i = "D"; colorI = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 1) { i = "D"; colorI = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 2) { i = "E"; colorI = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 2) { i = "E"; colorI = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 2) { i = "E"; colorI = 3; }
+
+                        else if (color_choice2 == 1 && letter_choice2 == 3) { i = "U"; colorI = 1; }
+                        else if (color_choice2 == 2 && letter_choice2 == 3) { i = "U"; colorI = 2; }
+                        else if (color_choice2 == 3 && letter_choice2 == 3) { i = "U"; colorI = 3; }
+                    }
+
+                  
                     if (a == "D" && b == "E" && c == "U" || c == "D" && b == "E" && a == "U")
                     {
                         if (colorA == colorB && colorB == colorC)
-                            computer_point = computer_point + 120;
+                            computer_current = computer_current + 120;
                         else if (colorA != colorB && colorB != colorC && colorA != colorC)
-                            computer_point = computer_point + 110;
+                            computer_current = computer_current + 110;
                         else
-                            computer_point = computer_point + 100;
+                            computer_current = computer_current + 100;
 
                     }
                     if (d == "D" && e == "E" && f == "U" || f == "D" && e == "E" && d == "U")
                     {
                         if (colorD == colorE && colorF == colorE)
-                            computer_point = computer_point + 120;
+                            computer_current = computer_current + 120;
                         else if (colorD != colorE && colorE != colorF && colorD != colorF)
-                            computer_point = computer_point + 110;
+                            computer_current = computer_current + 110;
                         else
-                            computer_point = computer_point + 100;
+                            computer_current = computer_current + 100;
 
                     }
                     if (g == "D" && h == "E" && i == "U" || i == "D" && h == "E" && g == "U")
                     {
                         if (colorG == colorH && colorH == colorI)
-                            computer_point = computer_point + 120;
+                            computer_current = computer_current + 120;
                         else if (colorG != colorH && colorH != colorI && colorG != colorH)
-                            computer_point = computer_point + 110;
+                            computer_current = computer_current + 110;
                         else
-                            computer_point = computer_point + 100;
+                            computer_current = computer_current + 100;
 
                     }
                     if (a == "D" && d == "E" && g == "U" || g == "D" && d == "E" && a == "U")
                     {
                         if (colorA == colorD && colorD == colorG)
-                            computer_point = computer_point + 120;
+                            computer_current = computer_current + 120;
                         else if (colorA != colorD && colorD != colorG && colorA != colorG)
-                            computer_point = computer_point + 110;
+                            computer_current = computer_current + 110;
                         else
-                            computer_point = computer_point + 100;
+                            computer_current = computer_current + 100;
                     }
                     if (b == "D" && e == "E" && h == "U" || h == "D" && e == "E" && b == "U")
                     {
                         if (colorB == colorE && colorE == colorH)
-                            computer_point = computer_point + 120;
+                            computer_current = computer_current + 120;
                         else if (colorB != colorE && colorE != colorH && colorB != colorH)
-                            computer_point = computer_point + 110;
+                            computer_current = computer_current + 110;
                         else
-                            computer_point = computer_point + 100;
+                            computer_current = computer_current + 100;
                     }
                     if (c == "D" && f == "E" && i == "U" || i == "D" && f == "E" && c == "U")
                     {
                         if (colorC == colorF && colorF == colorI)
-                            computer_point = computer_point + 120;
+                            computer_current = computer_current + 120;
                         else if (colorC != colorF && colorF != colorI && colorC != colorI)
-                            computer_point = computer_point + 110;
+                            computer_current = computer_current + 110;
                         else
-                            computer_point = computer_point + 100;
+                            computer_current = computer_current + 100;
                     }
                     if (a == "D" && e == "E" && i == "U" || i == "D" && e == "E" && a == "U")
                     {
                         if (colorA == colorE && colorE == colorI)
-                            computer_point = computer_point + 120;
+                            computer_current = computer_current + 120;
                         else if (colorA != colorE && colorE != colorI && colorA != colorI)
-                            computer_point = computer_point + 110;
+                            computer_current = computer_current + 110;
                         else
-                            computer_point = computer_point + 100;
+                            computer_current = computer_current + 100;
                     }
                     if (c == "D" && e == "E" && g == "U" || g == "D" && e == "E" && g == "U")
                     {
                         if (colorC == colorE && colorE == colorG)
-                            computer_point = computer_point + 120;
+                            computer_current = computer_current + 120;
                         else if (colorC != colorE && colorE != colorG && colorC != colorG)
-                            computer_point = computer_point + 110;
+                            computer_current = computer_current + 110;
                         else
-                            computer_point = computer_point + 100;
+                            computer_current = computer_current + 100;
                     }
 
                     if (a == "D" && b == "U" && c == "E" || a == "U" && b == "D" && c == "E" || a == "E" && b == "U" && c == "D" || a == "E" && b == "D" && c == "U")
                     {
                         if (colorA == colorB && colorB == colorC)
-                            computer_point = computer_point + 90;
+                            computer_current = computer_current + 90;
                         else if (colorA != colorB && colorB != colorC && colorA != colorC)
-                            computer_point = computer_point + 80;
+                            computer_current = computer_current + 80;
                         else
-                            computer_point = computer_point + 70;
+                            computer_current = computer_current + 70;
                     }
 
                     if (d == "D" && e == "U" && f == "E" || d == "U" && e == "D" && f == "E" || d == "E" && e == "U" && f == "D" || d == "E" && e == "D" && f == "U")
                     {
                         if (colorD == colorE && colorF == colorE)
-                            computer_point = computer_point + 90;
+                            computer_current = computer_current + 90;
                         else if (colorD != colorE && colorE != colorF && colorD != colorF)
-                            computer_point = computer_point + 80;
+                            computer_current = computer_current + 80;
                         else
-                            computer_point = computer_point + 70;
+                            computer_current = computer_current + 70;
                     }
 
                     if (g == "D" && h == "U" && i == "E" || g == "U" && h == "D" && i == "E" || g == "E" && h == "U" && i == "D" || g == "E" && h == "D" && i == "U")
                     {
                         if (colorG == colorH && colorH == colorI)
-                            computer_point = computer_point + 90;
+                            computer_current = computer_current + 90;
                         else if (colorG != colorH && colorH != colorI && colorG != colorI)
-                            computer_point = computer_point + 80;
+                            computer_current = computer_current + 80;
                         else
-                            computer_point = computer_point + 70;
+                            computer_current = computer_current + 70;
                     }
+
                     if (a == "D" && d == "U" && g == "E" || a == "U" && d == "D" && g == "E" || a == "E" && d == "U" && g == "D" || a == "E" && d == "D" && g == "U")
                     {
                         if (colorA == colorD && colorD == colorG)
-                            computer_point = computer_point + 90;
+                            computer_current = computer_current + 90;
                         else if (colorA != colorD && colorD != colorG && colorA != colorG)
-                            computer_point = computer_point + 80;
+                            computer_current = computer_current + 80;
                         else
-                            computer_point = computer_point + 70;
+                            computer_current = computer_current + 70;
                     }
+
                     if (b == "D" && e == "U" && h == "E" || b == "U" && e == "D" && h == "E" || b == "E" && e == "U" && h == "D" || b == "E" && e == "D" && h == "U")
                     {
                         if (colorB == colorE && colorE == colorH)
-                            computer_point = computer_point + 90;
+                            computer_current = computer_current + 90;
                         else if (colorB != colorE && colorE != colorH && colorB != colorH)
-                            computer_point = computer_point + 80;
+                            computer_current = computer_current + 80;
                         else
-                            computer_point = computer_point + 70;
+                            computer_current = computer_current + 70;
                     }
+
                     if (c == "D" && f == "U" && i == "E" || c == "U" && f == "D" && i == "E" || c == "E" && f == "U" && i == "D" || c == "E" && f == "D" && i == "U")
                     {
                         if (colorC == colorF && colorF == colorI)
-                            computer_point = computer_point + 90;
+                            computer_current = computer_current + 90;
                         else if (colorC != colorF && colorF != colorI && colorC != colorI)
-                            computer_point = computer_point + 80;
+                            computer_current = computer_current + 80;
                         else
-                            computer_point = computer_point + 70;
+                            computer_current = computer_current + 70;
                     }
+
                     if (a == "D" && e == "U" && i == "E" || a == "U" && e == "D" && i == "E" || a == "E" && e == "U" && i == "D" || a == "E" && e == "D" && i == "U")
                     {
                         if (colorA == colorE && colorE == colorI)
-                            computer_point = computer_point + 90;
+                            computer_current = computer_current + 90;
                         else if (colorA != colorE && colorE != colorI && colorA != colorI)
-                            computer_point = computer_point + 80;
+                            computer_current = computer_current + 80;
                         else
-                            computer_point = computer_point + 70;
+                            computer_current = computer_current + 70;
                     }
+
                     if (c == "D" && e == "U" && g == "E" || c == "U" && e == "D" && g == "E" || c == "E" && e == "U" && g == "D" || c == "E" && e == "D" && g == "U")
                     {
                         if (colorC == colorE && colorE == colorG)
-                            computer_point = computer_point + 90;
+                            computer_current = computer_current + 90;
                         else if (colorC != colorE && colorE != colorG && colorC != colorG)
-                            computer_point = computer_point + 80;
+                            computer_current = computer_current + 80;
                         else
-                            computer_point = computer_point + 70;
+                            computer_current = computer_current + 70;
                     }
+
                     if (a == b && b != c || a == c && c != b || b == c && b != a)
                     {
                         if (colorA == colorB && colorB == colorC)
-                            computer_point = computer_point + 30;
+                            computer_current = computer_current + 30;
                         else if (colorA != colorB && colorB != colorC && colorA != colorC)
-                            computer_point = computer_point + 20;
+                            computer_current = computer_current + 20;
                         else
-                            computer_point = computer_point + 0;
-
+                            computer_current = computer_current + 0;
                     }
+
                     if (d == e && e != f || d == f && f != e || e == f && f != d)
                     {
                         if (colorD == colorE && colorF == colorE)
-                            computer_point = computer_point + 30;
+                            computer_current = computer_current + 30;
                         else if (colorD != colorE && colorE != colorF && colorD != colorF)
-                            computer_point = computer_point + 20;
+                            computer_current = computer_current + 20;
                         else
-                            computer_point = computer_point + 0;
-
+                            computer_current = computer_current + 0;
                     }
+
                     if (g == i && i != h || g == h && h != i || i == h && h != g)
                     {
                         if (colorG == colorH && colorH == colorI)
-                            computer_point = computer_point + 30;
+                            computer_current = computer_current + 30;
                         else if (colorG != colorH && colorH != colorI && colorG != colorI)
-                            computer_point = computer_point + 20;
+                            computer_current = computer_current + 20;
                         else
-                            computer_point = computer_point + 0;
-
+                            computer_current = computer_current + 0;
                     }
+
                     if (a == d && d != g || a == g && g != d || d == g && a != g)
                     {
                         if (colorA == colorD && colorD == colorG)
-                            computer_point = computer_point + 30;
+                            computer_current = computer_current + 30;
                         else if (colorA != colorD && colorD != colorG && colorA != colorG)
-                            computer_point = computer_point + 20;
+                            computer_current = computer_current + 20;
                         else
-                            computer_point = computer_point + 0;
-
+                            computer_current = computer_current + 0;
                     }
+
                     if (b == e && e != h || b == h && h != e || e == h && h != b)
                     {
                         if (colorB == colorE && colorE == colorH)
-                            computer_point = computer_point + 30;
+                            computer_current = computer_current + 30;
                         else if (colorB != colorE && colorE != colorH && colorB != colorH)
-                            computer_point = computer_point + 20;
+                            computer_current = computer_current + 20;
                         else
-                            computer_point = computer_point + 0;
-
+                            computer_current = computer_current + 0;
                     }
+
                     if (c == f && f != i || c == i && f != i || f == i && i != c)
                     {
                         if (colorC == colorF && colorF == colorI)
-                            computer_point = computer_point + 30;
+                            computer_current = computer_current + 30;
                         else if (colorC != colorF && colorF != colorI && colorC != colorI)
-                            computer_point = computer_point + 20;
+                            computer_current = computer_current + 20;
                         else
-                            computer_point = computer_point + 0;
-
+                            computer_current = computer_current + 0;
                     }
+
                     if (a == e && e != i || a == i && i != e || e == i && i != a)
                     {
                         if (colorA == colorE && colorE == colorI)
-                            computer_point = computer_point + 30;
+                            computer_current = computer_current + 30;
                         else if (colorA != colorE && colorE != colorI && colorA != colorI)
-                            computer_point = computer_point + 20;
+                            computer_current = computer_current + 20;
                         else
-                            computer_point = computer_point + 0;
+                            computer_current = computer_current + 0;
                     }
+
                     if (c == e && e != g || c == g && g != e || g == e && e != c)
                     {
                         if (colorC == colorE && colorE == colorG)
-                            computer_point = computer_point + 30;
+                            computer_current = computer_current + 30;
                         else if (colorC != colorE && colorE != colorG && colorC != colorG)
-                            computer_point = computer_point + 20;
+                            computer_current = computer_current + 20;
                         else
-                            computer_point = computer_point + 0;
+                            computer_current = computer_current + 0;
                     }
+
                     if (a == b && b == c)
                     {
                         if (colorA == colorB && colorB == colorC)
-                            computer_point = computer_point + 60;
+                            computer_current = computer_current + 60;
                         else if (colorA != colorB && colorB != colorC && colorA != colorC)
-                            computer_point = computer_point + 50;
+                            computer_current = computer_current + 50;
                         else
-                            computer_point = computer_point + 40;
+                            computer_current = computer_current + 40;
                     }
+
                     if (d == e && e == f)
                     {
                         if (colorD == colorE && colorE == colorF)
-                            computer_point = computer_point + 60;
+                            computer_current = computer_current + 60;
                         else if (colorD != colorE && colorE != colorF && colorD != colorF)
-                            computer_point = computer_point + 50;
+                            computer_current = computer_current + 50;
                         else
-                            computer_point = computer_point + 40;
+                            computer_current = computer_current + 40;
                     }
+
                     if (g == h && h == i)
                     {
                         if (colorG == colorH && colorH == colorI)
-                            computer_point = computer_point + 60;
+                            computer_current = computer_current + 60;
                         else if (colorG != colorH && colorH != colorI && colorG != colorI)
-                            computer_point = computer_point + 50;
+                            computer_current = computer_current + 50;
                         else
-                            computer_point = computer_point + 40;
+                            computer_current = computer_current + 40;
                     }
+
                     if (a == e && e == i)
                     {
-
                         if (colorA == colorE && colorE == colorI)
-                            computer_point = computer_point + 60;
+                            computer_current = computer_current + 60;
                         else if (colorA != colorE && colorE != colorI && colorA != colorI)
-                            computer_point = computer_point + 50;
+                            computer_current = computer_current + 50;
                         else
-                            computer_point = computer_point + 40;
+                            computer_current = computer_current + 40;
                     }
+
                     if (c == e && e == g)
                     {
-
                         if (colorC == colorE && colorE == colorG)
-                            computer_point = computer_point + 60;
+                            computer_current = computer_current + 60;
                         else if (colorC != colorE && colorE != colorG && colorC != colorG)
-                            computer_point = computer_point + 50;
+                            computer_current = computer_current + 50;
                         else
-                            computer_point = computer_point + 40;
+                            computer_current = computer_current + 40;
                     }
+
                     if (a == d && d == g)
                     {
-
                         if (colorA == colorD && colorD == colorG)
-                            computer_point = computer_point + 60;
+                            computer_current = computer_current + 60;
                         else if (colorA != colorD && colorD != colorG && colorA != colorG)
-                            computer_point = computer_point + 50;
+                            computer_current = computer_current + 50;
                         else
-                            computer_point = computer_point + 40;
+                            computer_current = computer_current + 40;
                     }
+
                     if (b == e && e == h)
                     {
-
                         if (colorB == colorE && colorE == colorH)
-                            computer_point = computer_point + 60;
+                            computer_current = computer_current + 60;
                         else if (colorB != colorE && colorE != colorH && colorB != colorH)
-                            computer_point = computer_point + 50;
+                            computer_current = computer_current + 50;
                         else
-                            computer_point = computer_point + 40;
+                            computer_current = computer_current + 40;
                     }
+
                     if (c == f && f == i)
                     {
-
                         if (colorC == colorF && colorF == colorI)
-                            computer_point = computer_point + 60;
+                            computer_current = computer_current + 60;
                         else if (colorC != colorF && colorF != colorI && colorC != colorI)
-                            computer_point = computer_point + 50;
+                            computer_current = computer_current + 50;
                         else
-                            computer_point = computer_point + 40;
+                            computer_current = computer_current + 40;
                     }
-                    if (computer_point2<computer_point)
+                    if (computer_current >= computer_max)
                     {
-                        computer_point2 = computer_point;
-                        max_puan_yer = rand;
-                        max_puan_harf = rand2;
-                        max_puan_renk = rand3;
+                        computer_max = computer_current;
+                       
                     }
 
-                   
-
-                    tur = tur+1;
+                    computer_current = 0;
+                    tur = tur++;
                 } while (tur <= zorluk);
-               
-                maxvalue = computer_point2 + maxvalue;
-                computer_point2 = 0;
-
-
-                if (max_puan_yer == 1)
-                {
-                    if (max_puan_harf == 1) { a = "D"; if (max_puan_renk == 1) colorA = 1; else if (max_puan_renk == 2) colorA = 2; else colorA = 3; }
-                    else if (max_puan_harf == 2) { a = "E"; if (max_puan_renk == 1) colorA = 1; else if (max_puan_renk == 2) colorA = 2; else colorA = 3; }
-                    else { a = "U"; if (max_puan_renk == 1) colorA = 1; else if (max_puan_renk == 2) colorA = 2; else colorA = 3; }
-                }
-                else if (max_puan_yer == 2)
-                {
-                    if (max_puan_harf == 1) { b = "D"; if (max_puan_renk == 1) colorB = 1; else if (max_puan_renk == 2) colorB = 2; else colorB = 3; }
-                    else if (max_puan_harf == 2) { b = "E"; if (max_puan_renk == 1) colorB = 1; else if (max_puan_renk == 2) colorB = 2; else colorB = 3; }
-                    else { b = "U"; if (max_puan_renk == 1) colorB = 1; else if (max_puan_renk == 2) colorB = 2; else colorB = 3; }
-                }
-                else if (max_puan_yer == 3)
-                {
-                    if (max_puan_harf == 1) { c = "D"; if (max_puan_renk == 1) colorC = 1; else if (max_puan_renk == 2) colorC = 2; else colorC = 3; }
-                    else if (max_puan_harf == 2) { c = "E"; if (max_puan_renk == 1) colorC = 1; else if (max_puan_renk == 2) colorC = 2; else colorC = 3; }
-                    else { c = "U"; if (max_puan_renk == 1) colorC = 1; else if (max_puan_renk == 2) colorC = 2; else colorC = 3; }
-                }
-                else if (max_puan_yer == 4)
-                {
-                    if (max_puan_harf == 1) { d = "D"; if (max_puan_renk == 1) colorD = 1; else if (max_puan_renk == 2) colorD = 2; else colorD = 3; }
-                    else if (max_puan_harf == 2) { c = "E"; if (max_puan_renk == 1) colorD = 1; else if (max_puan_renk == 2) colorD = 2; else colorD = 3; }
-                    else { d = "U"; if (max_puan_renk == 1) colorD = 1; else if (max_puan_renk == 2) colorD = 2; else colorD = 3; }
-                }
-                else if (max_puan_yer == 5)
-                {
-                    if (max_puan_harf == 1) { e = "D"; if (max_puan_renk == 1) colorE = 1; else if (max_puan_renk == 2) colorE = 2; else colorE = 3; }
-                    else if (max_puan_harf == 2) { e = "E"; if (max_puan_renk == 1) colorE = 1; else if (max_puan_renk == 2) colorE = 2; else colorE = 3; }
-                    else { e = "U"; if (max_puan_renk == 1) colorE = 1; else if (max_puan_renk == 2) colorE = 2; else colorE = 3; }
-                }
-                else if (max_puan_yer == 6)
-                {
-                    if (max_puan_harf == 1) { f = "D"; if (max_puan_renk == 1) colorF = 1; else if (max_puan_renk == 2) colorF = 2; else colorF = 3; }
-                    else if (max_puan_harf == 2) { f = "E"; if (max_puan_renk == 1) colorF = 1; else if (max_puan_renk == 2) colorF = 2; else colorF = 3; }
-                    else { f = "U"; if (max_puan_renk == 1) colorF = 1; else if (max_puan_renk == 2) colorF = 2; else colorF = 3; }
-                }
-                else if (max_puan_yer == 7)
-                {
-                    if (max_puan_harf == 1) { g = "D"; if (max_puan_renk == 1) colorG = 1; else if (max_puan_renk == 2) colorG = 2; else colorG = 3; }
-                    else if (max_puan_harf == 2) { g = "E"; if (max_puan_renk == 1) colorG = 1; else if (max_puan_renk == 2) colorG = 2; else colorG = 3; }
-                    else { g = "U"; if (max_puan_renk == 1) colorG = 1; else if (max_puan_renk == 2) colorG = 2; else colorG = 3; }
-                }
-                else if (max_puan_yer == 8)
-                {
-                    if (max_puan_harf == 1) { h = "D"; if (max_puan_renk == 1) colorH = 1; else if (max_puan_renk == 2) colorH = 2; else colorH = 3; }
-                    else if (max_puan_harf == 2) { h = "E"; if (max_puan_renk == 1) colorH = 1; else if (max_puan_renk == 2) colorH = 2; else colorH = 3; }
-                    else { h = "U"; if (max_puan_renk == 1) colorH = 1; else if (max_puan_renk == 2) colorH = 2; else colorH = 3; }
-                }
-                else
-                {
-                    if (max_puan_harf == 1) { i = "D"; if (max_puan_renk == 1) colorI = 1; else if (max_puan_renk == 2) colorI = 2; else colorI = 3; }
-                    else if (max_puan_harf == 2) { i = "E"; if (max_puan_renk == 1) colorI = 1; else if (max_puan_renk == 2) colorI = 2; else colorI = 3; }
-                    else { i = "U"; if (max_puan_renk == 1) colorI = 1; else if (max_puan_renk == 2) colorI = 2; else colorI = 3; }
-                }
+                computer_point_total = computer_point_total + computer_max;
+                computer_max = 0;
+                
+     
                 Console.WriteLine("    1     2     3  ");
                 Console.WriteLine(" |-----|-----|-----|");
                 // A satırı
@@ -1487,7 +1510,7 @@ namespace efe
                 Console.ResetColor();
                 Console.WriteLine("  |");
                 Console.WriteLine(" |-----|-----|-----|");
-                Console.WriteLine("Computer AI's point = " + maxvalue);
+                Console.WriteLine("Computer AI's point = " + computer_point_total);
                 
                 for (int forsayacı2 = 0; forsayacı2 < 4; forsayacı2++)
                 {
@@ -1551,12 +1574,12 @@ namespace efe
                 }
                
             } 
-            if (maxvalue > human_point)
+            if (computer_point_total > human_point)
             {
-                Console.WriteLine("COMPUTER AI WON THE GAME with " + maxvalue + " point");
+                Console.WriteLine("COMPUTER AI WON THE GAME with " + computer_point_total + " point");
                 Console.ReadLine();
             }
-            else if (maxvalue < human_point)
+            else if (computer_point_total < human_point)
             {
                 Console.WriteLine("PLAYER WON THE GAME with " + human_point + " point");
                 Console.ReadLine();
